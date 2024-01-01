@@ -1,0 +1,15 @@
+const {Router} = require("express")
+const { login, loginpage, signupui, signup, profilepage, userdata, logout } = require("../controller/user.logic")
+const { auth } = require("../middlewares/auth")
+// const { signupui, usercreate, login, loginui } = require("../controllers/user.controller")
+// const { scheck } = require("../middlewares/user.middlewares")
+const router = Router()
+
+router.get("/signup",signupui)
+router.post("/signup",signup)
+router.get("/login",loginpage)
+router.post("/login",login)
+router.get("/profile",auth,profilepage)
+router.get("/profiledata",userdata)
+router.get("/logout",logout)
+module.exports = router

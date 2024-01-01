@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <style>
+        form{
+            /* height: 400px; */
+           
+            padding: 20px;
+            margin: 0px auto;
+            border: 1px solid black;
+        }
+        input{
+            width: 100%;
+            margin: 10px 0px;
+            border: 1px solid white;
+            padding: 5px 10px;
+            background-color: rgb(131, 63, 15) ;
+            color: white;
+
+        }
+        body{
+            font-family: cursive;
+        }
+        input::placeholder{
+            color: white;
+        }
+        .bgimg{
+            width: 400px;
+            margin:  0 auto;
+            background-image: url("https://d2w1ef2ao9g8r9.cloudfront.net/otl-images/AdobeStock_520785046-1200x800-6a45073.jpeg");
+            background-size: cover;
+            
+        }
+        select{
+            width: 100%;
+            margin: 10px 0px;
+            border: 1px solid white;
+            padding: 5px 10px;
+            background-color: rgb(131, 63, 15) ;
+            color: white;
+
+        }
+    </style>
+</head>
+<body>
+    <%- include("nav")%>
+   <div class="bgimg">
+    <div style="background-color: rgba(0, 0, 0, 0.397);">
+        <form action="/user/login" method="post" id="form">
+            <h1 style="text-align: center; color: white;">Login</h1>
+            <input type="email" name="email" id="email" placeholder="email">
+            <input type="text" name="password" id="password" placeholder="password">
+            <input type="submit"  style="background-color:rgb(131, 63, 15) ; border: 1px solid white ; padding: 5px 10px ;color: white;">
+        </form>
+    </div>
+   </div>
+
+    
+</body>
+</html>

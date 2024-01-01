@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: cursive;
+        }
+        #ui {
+            display: flex;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        #ui div {
+            padding: 20px;
+            /* border: 1px solid black; */
+            /* box-shadow: 0px 0px 15px rgb(131, 63, 15); */
+            border: 1px solid rgb(131, 63, 15);
+            border-radius: 11px;
+            margin: 10px;
+        }
+
+        img {
+            height: 250px;
+            width: 250px;
+        }
+        button{
+            background-color: rgb(131, 63, 15);
+            padding: 5px 10px;
+            margin: 5px 10px;
+            color: white;
+            border: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include("nav")%>
+    <div id="ui"></div>
+</body>
+<script>
+    const pro_delete = (id)=>{
+        fetch(`/recipe/delete/${id}`,{
+            method: 'DELETE',
+        })
+        .catch((error)=>console.log(error))
+    }
+    const display = (data) => {
+        document.getElementById("ui").innerHTML = " "
+        data.map((ele) => {
+            let img = document.createElement("img");
+            img.src = ele.img
+            let title = document.createElement("h4");
+            title.innerHTML = `Title : ${ele.title}`;
+            let des = document.createElement("h5");
+            des.innerHTML = `description : ${ele.des}`;
+            let btn1 = document.createElement("button");
+            btn1.innerHTML = `Update`
+            btn1.addEventListener("click",()=>{
+                fetch("/recipe/updatpage",{
+                    method: "GET",
+                })
+            })
+            let btn2 = document.createElement("button");
+            btn2.innerHTML = `delete`
+            btn2.addEventListener("click",()=> pro_delete(ele._id))
+            let div = document.createElement("div")
+            div.append(img, title, des, btn1, btn2);
+
+            document.getElementById("ui").append(div)
+        })
+    }
+    fetch("/recipe/userrecipe")
+        .then((response) => response.json())
+        .then((response) => {
+            products = response;
+            display(products);
+        });
+</script>
+</html>

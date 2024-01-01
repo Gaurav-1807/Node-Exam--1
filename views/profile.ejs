@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body{
+            font-family: cursive;
+        }
+        #ui {
+            width: 80%;
+            display: flex;
+            grid-template-columns: repeat(2, 1fr);
+            margin: 0 auto;
+            justify-content: center;
+            border: 1px solid black;
+        }
+
+        #ui div {
+
+            padding: 20px;
+            /* border: 1px solid black; */
+            box-shadow: 0px 0px 15px;
+            border-radius: 11px;
+            margin: 10px;
+        }
+
+        .profile-div {
+            padding: 10px;
+            /* width: 20%; */
+            border: 1px double black;
+        }
+
+        img {
+            height: 250px;
+            width: 250px;
+        }
+
+        button {
+            margin-top: 10px;
+            margin-right: 10px;
+            padding: 5px;
+        }
+
+        .d-flex {
+            display: flex;
+            flex-wrap: wrap;
+
+        }
+
+      
+
+        #user h1 {
+            font-size: 18px;
+            text-align: center;
+        }
+
+        #user h2 {
+            font-size: 14px;
+            margin: 10px 0px;
+            text-align: center;
+        }
+
+      
+    </style>
+</head>
+<body>
+    <%- include("nav") %>
+    <div id="user"></div>
+    <a href="/user/logout" style="background-color:  rgb(131, 63, 15);padding: 5px 10px; color: white ;text-decoration: none; position: absolute;left: 48%;width: 65px;margin: 10px; ">logout</a>
+</body>
+<script>
+     const ui = (data) => {
+        console.log(data);
+        document.getElementById("user").innerHTML = " "
+       
+       
+        let maindiv = document.createElement("div");
+       
+        maindiv.setAttribute("class", "profile-div")
+        // console.log(img);
+        let username = document.createElement("h1")
+        username.innerHTML = `Username : ${data.username}`
+        let email = document.createElement("h2")
+        email.innerHTML = `Email : ${data.email}`
+        let role = document.createElement("h2")
+        role.innerHTML = `Role : ${data.role}`
+        let div = document.createElement("div")
+        
+        maindiv.append( username , email , role )
+        div.append(maindiv)
+        document.getElementById("user").append(div)
+
+    }
+    fetch("/user/profiledata")
+        .then((response) => response.json())
+        .then((response) => {
+            products = response;
+            ui(products);
+        })
+        .catch((error) => console.log(error))
+</script>
+</html>
